@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import {auth, db } from '../config/firebase.js';
-import { getDatabase, ref, onValue, push ,set} from 'firebase/database';
+import {  ref, onValue, push ,set} from 'firebase/database';
 import * as Location from 'expo-location';
 
 async function askLocationPermission() {
@@ -21,7 +21,7 @@ function Room(props) {
     const getLocation = async () => {
       const { coords } = await Location.getCurrentPositionAsync({});
       setLocation(coords);
-      const locationRef = ref(db, `rooms/${props.roomId}/location/${props.useremail}`);
+      const locationRef = ref(db, `rooms/${props.rooms}/location/${props.useremail}`);
       set(locationRef, {
         latitude: coords.latitude,
         longitude: coords.longitude,
@@ -30,7 +30,7 @@ function Room(props) {
     askLocationPermission();
     const intervalId = setInterval(getLocation, 5000); // update location every 5 seconds
     return () => clearInterval(intervalId);
-  }, []);
+  }, [props.useremail, props.rooms]);
 
   if (!location) {
     return null;
@@ -52,6 +52,7 @@ function Room(props) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
