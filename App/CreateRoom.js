@@ -4,13 +4,14 @@ import { ref, push, set } from 'firebase/database';
 import { auth, db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
 import {name} from '../screens/HomeScreen';
-
+let nme='';
 console.log(name); // e.g. "adjvnj3jnj35uojb"
  const CreateRoom = () => {
   
   console.log(name);
   const [roomName, setRoomName] = useState('');
   const [pass, setPass] = useState('');
+  const [yname, setyname] = useState('');
   const navigation = useNavigation();
   const handleCreateRoom = () => {
     if (roomName.trim() === '') {
@@ -34,7 +35,7 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
       Alert.alert('Error', 'Failed to create room');
     });
   };
-  
+  nme=yname;
   
   return (
     // Exporting roomName from the CreateRoom component
@@ -51,6 +52,12 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
           placeholder='Password'
           value={pass}
           onChangeText={text => setPass(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Enter your name'
+          value={yname}
+          onChangeText={text => setyname(text)}
         />
         <Button title='Create Room' onPress={handleCreateRoom} />
       </View>
@@ -77,3 +84,4 @@ export { CreateRoom };
 
 
 export {name}
+export {nme}

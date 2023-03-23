@@ -4,18 +4,19 @@ import { ref, get } from 'firebase/database';
 import { db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
 let dd='';
+let nme2='';
  const JoinRoom = () => {
   const [roomId, setRoomId] = useState('');
   const [password, setPassword] = useState('');
   const [id, setId] = useState('');
   const navigation = useNavigation();
- 
+ const [yname, setyname] = useState('');
   const handleJoinRoom = async () => {
     if (!roomId.trim()) {
       Alert.alert('Error', 'Please enter a room ID');
       return;
     }
-
+nme2=yname;
     const roomRef = ref(db, `rooms/${roomId}`);
     const roomSnapshot = await get(roomRef);
     dd=roomId;
@@ -45,6 +46,12 @@ let dd='';
         value={roomId}
         onChangeText={setRoomId}
       />
+      <TextInput
+          style={styles.input}
+          placeholder='Enter your name'
+          value={yname}
+          onChangeText={text => setyname(text)}
+        />
     
 
       <Button title='Join Room' onPress={handleJoinRoom} />
@@ -68,3 +75,5 @@ const styles = StyleSheet.create({
 });
 export {JoinRoom}
 export {dd}
+
+export {nme2}
