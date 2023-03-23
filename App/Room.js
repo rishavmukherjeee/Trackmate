@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView, { Circle } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set  } from 'firebase/database';
 import * as Location from 'expo-location';
@@ -58,15 +58,11 @@ function Room(props) {
           longitudeDelta: 0.01,
         }}
       >
-        <Circle
-          center={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }}
-          radius={50}
-          fillColor="rgba(255, 0, 0, 0.5)"
-          strokeColor="rgba(255, 0, 0, 0.2)"
-        />
+        <Marker
+            
+            coordinate={ location }
+            
+          />
       </MapView>
     </View>
   );

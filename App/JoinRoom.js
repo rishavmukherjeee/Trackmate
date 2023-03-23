@@ -16,7 +16,7 @@ export const JoinRoom = () => {
       return;
     }
 
-    const roomRef = ref(db, `rooms/${id}`);
+    const roomRef = ref(db, `rooms/${roomId}`);
     const roomSnapshot = await get(roomRef);
     console.log(id);
     if (!roomSnapshot.exists()) {
