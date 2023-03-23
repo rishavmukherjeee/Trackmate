@@ -44,13 +44,7 @@ export const JoinRoom = () => {
         value={roomId}
         onChangeText={setRoomId}
       />
-      <TextInput
-        style={styles.input}
-        placeholder='Password'
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-      />
+    
 
       <Button title='Join Room' onPress={handleJoinRoom} />
     </View>
