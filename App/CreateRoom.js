@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
     const newRoomRef = ref(db, `rooms/${roomName.trim()}`); // Use roomName as key
     set(newRoomRef, {
       password: pass,
-      user: user
+      user:roomName,
     })
     .then(() => {
       console.log('Room created successfully!');
