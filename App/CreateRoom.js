@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { ref, push, set } from 'firebase/database';
-import { db } from '../config/firebase';
+import { auth, db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
+import getRandomName from './getRandomName';
+const name = getRandomName();
+console.log(name); // e.g. "adjvnj3jnj35uojb"
+
+
 
  const CreateRoom = () => {
+  
+  console.log(name);
   const [roomName, setRoomName] = useState('');
   const [pass, setPass] = useState('');
   const [user, setUsers] = useState('')
   const navigation = useNavigation();
-  
   const handleCreateRoom = () => {
     if (roomName.trim() === '') {
       Alert.alert('Error', 'Please enter a room name');
       return;
     }
     
-    const newRoomRef = ref(db, `rooms/${roomName.trim()}`); // Use roomName as key
+    const newRoomRef = ref(db, `rooms/${name}`);
     set(newRoomRef, {
       password: pass,
       user:roomName,
+      id:name
     })
     .then(() => {
       console.log('Room created successfully!');

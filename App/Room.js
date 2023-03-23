@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
-import { ref, set } from 'firebase/database';
+import { ref, set  } from 'firebase/database';
 import * as Location from 'expo-location';
-
+import getRandomName from './getRandomName';
+const name = getRandomName();
+console.log(name); // e.g. "adjvnj3jnj35uojb"
 
 async function askLocationPermission() {
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -28,7 +30,7 @@ function Room(props) {
       const uid = auth.currentUser.uid;
       const locationRef = ref(
         db,
-        `rooms/location/${uid}`
+        `rooms/${name}/${uid}/location`
       );
       set(locationRef, {
         latitude: coords.latitude,

@@ -7,34 +7,37 @@ import { useNavigation } from '@react-navigation/native';
 export const JoinRoom = () => {
   const [roomId, setRoomId] = useState('');
   const [password, setPassword] = useState('');
+  const [id, setId] = useState('');
   const navigation = useNavigation();
-
+ 
   const handleJoinRoom = async () => {
     if (!roomId.trim()) {
       Alert.alert('Error', 'Please enter a room ID');
       return;
     }
 
-    const roomRef = ref(db, `rooms/$name:${roomId}`);
+    const roomRef = ref(db, `rooms/${id}`);
     const roomSnapshot = await get(roomRef);
-    console.log(roomId);
+    console.log(id);
     if (!roomSnapshot.exists()) {
       Alert.alert('Error', 'Room not found');
       return;
     }
 
     const roomData = roomSnapshot.val();
-
-    if (password !== roomData.password) {
+/*
+    if (password !== roomData[password]) {
+      console.log(roomData.password)
       Alert.alert('Error', 'Incorrect password');
       return;
-    }
+    }*/
 
     navigation.navigate('Room');
   };
 
   return (
     <View style={styles.container}>
+      
       <TextInput
         style={styles.input}
         placeholder='Room ID'
@@ -48,6 +51,7 @@ export const JoinRoom = () => {
         onChangeText={setPassword}
         secureTextEntry={true}
       />
+
       <Button title='Join Room' onPress={handleJoinRoom} />
     </View>
   );
