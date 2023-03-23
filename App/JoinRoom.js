@@ -3,9 +3,9 @@ import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { ref, get } from 'firebase/database';
 import { db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
-
-export const JoinRoom = () => {
-  const [roomId, setRoomId] = useState('');
+const [roomId, setRoomId] = useState('');
+ const JoinRoom = () => {
+  
   const [password, setPassword] = useState('');
   const [id, setId] = useState('');
   const navigation = useNavigation();
@@ -65,3 +65,5 @@ const styles = StyleSheet.create({
     marginBottom: 20
   }
 });
+export {JoinRoom}
+export {roomId}

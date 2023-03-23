@@ -4,9 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set  } from 'firebase/database';
 import * as Location from 'expo-location';
-import getRandomName from './getRandomName';
-const name = getRandomName();
-console.log(name); // e.g. "adjvnj3jnj35uojb"
+import { name } from './CreateRoom.js';
 
 async function askLocationPermission() {
   let { status } = await Location.requestForegroundPermissionsAsync();

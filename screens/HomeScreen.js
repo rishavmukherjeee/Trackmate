@@ -5,7 +5,11 @@ import { auth } from '../config';
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from '../components';
 import { Images,Colors} from '../config';
-export const HomeScreen = () => {
+
+import getRandomName from '../App/getRandomName';
+let name = getRandomName(9);
+
+const HomeScreen = () => {
   const navigation = useNavigation();
   const handleLogout = () => {
     signOut(auth).catch(error => console.log('Error logging out: ', error));
@@ -58,3 +62,5 @@ const styles = StyleSheet.create({
     width: '80%'
   }
 });
+export {HomeScreen}
+export{name}

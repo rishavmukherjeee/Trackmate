@@ -3,8 +3,8 @@ import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { ref, push, set } from 'firebase/database';
 import { auth, db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
-import getRandomName from './getRandomName';
-const name = getRandomName();
+import {name} from '../screens/HomeScreen';
+
 console.log(name); // e.g. "adjvnj3jnj35uojb"
 
 
@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
 });
 
 export { CreateRoom };
-export{Name}
 
+
+export {name}
