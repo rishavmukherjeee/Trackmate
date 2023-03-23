@@ -4,8 +4,8 @@ import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue } from 'firebase/database';
 import * as Location from 'expo-location';
-import { name } from './CreateRoom.js';
-
+import { dd } from './JoinRoom.js';
+ const name =dd;
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -22,7 +22,7 @@ function Room(props) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
-
+ 
   useEffect(() => {
     const getLocation = async () => {
       const { coords } = await askLocationPermission();
