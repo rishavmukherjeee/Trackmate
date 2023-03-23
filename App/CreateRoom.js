@@ -6,15 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import {name} from '../screens/HomeScreen';
 
 console.log(name); // e.g. "adjvnj3jnj35uojb"
-
-
-
  const CreateRoom = () => {
   
   console.log(name);
   const [roomName, setRoomName] = useState('');
   const [pass, setPass] = useState('');
-  const [user, setUsers] = useState('')
   const navigation = useNavigation();
   const handleCreateRoom = () => {
     if (roomName.trim() === '') {
@@ -61,8 +57,6 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
     
   );
 };
-const Name = () => {return(roomName)}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

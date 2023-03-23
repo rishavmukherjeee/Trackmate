@@ -3,9 +3,9 @@ import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { ref, get } from 'firebase/database';
 import { db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
-const [roomId, setRoomId] = useState('');
+let dd='';
  const JoinRoom = () => {
-  
+  const [roomId, setRoomId] = useState('');
   const [password, setPassword] = useState('');
   const [id, setId] = useState('');
   const navigation = useNavigation();
@@ -18,7 +18,8 @@ const [roomId, setRoomId] = useState('');
 
     const roomRef = ref(db, `rooms/${roomId}`);
     const roomSnapshot = await get(roomRef);
-    console.log(id);
+    dd=roomId;
+    console.log(dd);
     if (!roomSnapshot.exists()) {
       Alert.alert('Error', 'Room not found');
       return;
@@ -66,4 +67,4 @@ const styles = StyleSheet.create({
   }
 });
 export {JoinRoom}
-export {roomId}
+export {dd}
