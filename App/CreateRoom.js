@@ -9,7 +9,7 @@ let name2=name;
 console.log(name); // e.g. "adjvnj3jnj35uojb"
  const CreateRoom = () => {
   
-  console.log(name);
+  
   const [roomName, setRoomName] = useState('');
   const [pass, setPass] = useState('');
   const [yname, setyname] = useState('');
@@ -19,7 +19,8 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
       Alert.alert('Error', 'Please enter a room name');
       return;
     }
-    
+   
+
     const newRoomRef = ref(db, `rooms/${name}`);
     set(newRoomRef, {
       password: pass,
@@ -29,7 +30,7 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
     .then(() => {
       console.log('Room created successfully!');
       setRoomName('');
-      navigation.navigate('Room');
+      navigation.navigate('Join');
     })
     .catch(error => {
       console.log('Error creating room: ', error);

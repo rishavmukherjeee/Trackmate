@@ -6,14 +6,7 @@ import { ref, set ,onValue } from 'firebase/database';
 import * as Location from 'expo-location';
 import { dd } from './JoinRoom.js';
 import { name2 } from './CreateRoom.js';
-let ame='';
-if(dd===null){
-  ame =name2;}
-else{
-  ame=dd;
-}
-const name=ame;
-console.log(name)
+
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -21,12 +14,22 @@ async function askLocationPermission() {
     setErrorMsg('Permission to access location was denied');
     return;
   }
-
+  
   let location = await Location.getCurrentPositionAsync({});
   return location;
 }
 
 function Room(props) {
+  let ame='';
+  if(dd==''){
+    ame =name2;}
+  else{
+    ame=dd;
+  }
+  let name=ame;
+  console.log(dd+" joinroom id");
+  console.log(name2+" createroom id");
+  console.log(name+" roomid to be joined");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);

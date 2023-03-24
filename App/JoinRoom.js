@@ -3,10 +3,11 @@ import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { ref, get } from 'firebase/database';
 import { db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
+import { name2 } from './CreateRoom';
 let dd='';
 let nme2='';
  const JoinRoom = () => {
-  const [roomId, setRoomId] = useState('');
+  const [roomId, setRoomId] = useState(name2);
   const [password, setPassword] = useState('');
   const [id, setId] = useState('');
   const navigation = useNavigation();
