@@ -5,6 +5,7 @@ import { auth, db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
 import {name} from '../screens/HomeScreen';
 let nme='';
+let name2=name;
 console.log(name); // e.g. "adjvnj3jnj35uojb"
  const CreateRoom = () => {
   
@@ -23,7 +24,7 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
     set(newRoomRef, {
       password: pass,
       user:roomName,
-      id:name
+      
     })
     .then(() => {
       console.log('Room created successfully!');
@@ -83,5 +84,5 @@ const styles = StyleSheet.create({
 export { CreateRoom };
 
 
-export {name}
+export {name2}
 export {nme}

@@ -5,7 +5,15 @@ import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue } from 'firebase/database';
 import * as Location from 'expo-location';
 import { dd } from './JoinRoom.js';
- const name =dd;
+import { name2 } from './CreateRoom.js';
+let ame='';
+if(dd===null){
+  ame =name2;}
+else{
+  ame=dd;
+}
+const name=ame;
+console.log(name)
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -27,6 +35,8 @@ function Room(props) {
     const getLocation = async () => {
       const { coords } = await askLocationPermission();
       setLocation(coords);
+      
+ //console.log(dd);
       const uid = auth.currentUser.uid;
       const locationRef = ref(
         db,
@@ -50,6 +60,7 @@ function Room(props) {
     const roomRef = ref(db, `rooms/${name}`);
     onValue(roomRef, (snapshot) => {
       const roomData = snapshot.val();
+      
       if (roomData) {
         const users = Object.keys(roomData);
         const userLocations = users.map((uid) => ({

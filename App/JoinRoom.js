@@ -20,7 +20,7 @@ nme2=yname;
     const roomRef = ref(db, `rooms/${roomId}`);
     const roomSnapshot = await get(roomRef);
     dd=roomId;
-    console.log(dd);
+    //console.log(dd);
     if (!roomSnapshot.exists()) {
       Alert.alert('Error', 'Room not found');
       return;
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
   }
 });
 export {JoinRoom}
-export {dd}
+export {dd}//roomid
 
 export {nme2}
