@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View ,Text} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue } from 'firebase/database';
@@ -97,6 +97,7 @@ function Room(props) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.smallText}>Room id:   {name}</Text>
       <MapView style={styles.map} initialRegion={initialRegion}>
   {otherUserLocations.map((userLocation) => (
     userLocation.location && (
@@ -127,6 +128,12 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  smallText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 1,
   },
 });
 
