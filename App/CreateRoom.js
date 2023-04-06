@@ -5,31 +5,25 @@ import { auth, db } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
 import {name} from '../screens/HomeScreen';
 let nme='';
-let name2=name;
+let name2=name;//id
 console.log(name); // e.g. "adjvnj3jnj35uojb"
  const CreateRoom = () => {
   
-  
-  const [roomName, setRoomName] = useState('');
-  const [pass, setPass] = useState('');
   const [yname, setyname] = useState('');
   const navigation = useNavigation();
   const handleCreateRoom = () => {
-    if (roomName.trim() === '') {
-      Alert.alert('Error', 'Please enter a room name');
-      return;
-    }
+   
    
 
     const newRoomRef = ref(db, `rooms/${name}`);
     set(newRoomRef, {
-      password: pass,
-      user:roomName,
+      
+      user:yname,
       
     })
     .then(() => {
       console.log('Room created successfully!');
-      setRoomName('');
+     
       navigation.navigate('Join');
     })
     .catch(error => {
@@ -43,18 +37,8 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
     // Exporting roomName from the CreateRoom component
     
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder='Room Name'
-          value={roomName}
-          onChangeText={text => setRoomName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Password'
-          value={pass}
-          onChangeText={text => setPass(text)}
-        />
+
+        
         <TextInput
           style={styles.input}
           placeholder='Enter your name'
@@ -85,5 +69,5 @@ const styles = StyleSheet.create({
 export { CreateRoom };
 
 
-export {name2}
+export {name2}//id
 export {nme}

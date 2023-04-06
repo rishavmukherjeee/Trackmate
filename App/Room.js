@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View ,Text} from 'react-native';
+import { StyleSheet, View ,Text, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue } from 'firebase/database';
 import * as Location from 'expo-location';
 import { dd } from './JoinRoom.js';
 import { name2 } from './CreateRoom.js';
+import { nme2 } from './JoinRoom.js';
+import { useNavigation } from '@react-navigation/native';
+import ChatIcon from '../assets/chat.png';
+
 
 async function askLocationPermission() {
   
@@ -27,9 +31,9 @@ function Room(props) {
     ame=dd;
   }
   let name=ame;
-  console.log(dd+" joinroom id");
-  console.log(name2+" createroom id");
-  console.log(name+" roomid to be joined");
+  //console.log(dd+" joinroom id");
+  //console.log(name2+" createroom id");
+  //console.log(name+" roomid to be joined");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
@@ -49,8 +53,9 @@ function Room(props) {
         latitude: coords.latitude,
         longitude: coords.longitude,
       });
+      
     };
-
+    
     const intervalId = setInterval(getLocation, 5000); // update location every 5 seconds
     return () => clearInterval(intervalId);
   }, [props.rooms]);
@@ -94,7 +99,8 @@ function Room(props) {
     latitudeDelta: 0.7,
     longitudeDelta: 0.7,
   };
-
+ 
+    
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
@@ -118,6 +124,9 @@ function Room(props) {
     />
   )}
 </MapView>
+<TouchableOpacity style={styles.chatButton} onPress={useNavigation().navigate('Chat')}>
+        <Image source={ChatIcon} style={styles.chatIcon} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -134,6 +143,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     margin: 1,
+  },
+  chatButton: {
+    position: 'absolute',
+    bottom: 24,
+    right: 24,
+    borderRadius: 24,
+    padding: 12,
+    margin: 16,
+    elevation: 5,
   },
 });
 
