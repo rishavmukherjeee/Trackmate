@@ -23,6 +23,7 @@ async function askLocationPermission() {
   return location;
 }
 
+  
 function Room(props) {
   let ame='';
   if(dd==''){
@@ -99,8 +100,10 @@ function Room(props) {
     latitudeDelta: 0.7,
     longitudeDelta: 0.7,
   };
- 
-    
+  const navigation = useNavigation();
+  const handleChatPress = () => {
+    navigation.navigate('Chat');
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
@@ -124,9 +127,12 @@ function Room(props) {
     />
   )}
 </MapView>
-<TouchableOpacity style={styles.chatButton} onPress={useNavigation().navigate('Chat')}>
-        <Image source={ChatIcon} style={styles.chatIcon} />
-      </TouchableOpacity>
+<TouchableOpacity
+      style={styles.chatButton}
+      onPress={handleChatPress}
+    >
+      <Image source={ChatIcon} style={styles.chatIcon} />
+    </TouchableOpacity>
     </View>
   );
 }
@@ -146,13 +152,20 @@ const styles = StyleSheet.create({
   },
   chatButton: {
     position: 'absolute',
-    bottom: 24,
-    right: 24,
-    borderRadius: 24,
-    padding: 12,
-    margin: 16,
     elevation: 5,
+    width: 20,
+    height: 20,
+    resizeMode: 'contain'
   },
+  chatIcon:{
+    borderRadius:10,
+    marginVertical:599,
+    width:50,
+    height:50,
+    margin:20,
+  }
+
+  
 });
 
 export default Room;
