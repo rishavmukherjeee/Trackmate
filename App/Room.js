@@ -4,11 +4,11 @@ import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue } from 'firebase/database';
 import * as Location from 'expo-location';
+import { useNavigation } from '@react-navigation/native';
+import ChatIcon from '../assets/chat.png';
 import { dd } from './JoinRoom.js';
 import { name2 } from './CreateRoom.js';
 import { nme2 } from './JoinRoom.js';
-import { useNavigation } from '@react-navigation/native';
-import ChatIcon from '../assets/chat.png';
 
 
 async function askLocationPermission() {
@@ -25,6 +25,8 @@ async function askLocationPermission() {
 
   
 function Room(props) {
+  const navigation = useNavigation();
+  
   let ame='';
   if(dd==''){
     ame =name2;}
@@ -92,7 +94,6 @@ function Room(props) {
   if (!locations || locations.length === 0) {
     return null;
   }
-
   // Use the first location as the initial region for the map
   const initialRegion = {
     latitude: 22.5726,
@@ -100,7 +101,6 @@ function Room(props) {
     latitudeDelta: 0.7,
     longitudeDelta: 0.7,
   };
-  const navigation = useNavigation();
   const handleChatPress = () => {
     navigation.navigate('Chat');
   }

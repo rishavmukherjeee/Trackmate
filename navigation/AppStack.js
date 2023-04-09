@@ -6,8 +6,15 @@ import { HomeScreen } from '../screens';
 import {ChatScreen} from '../App/ChatScreen';
 import Room from '../App/Room';
 import { Button } from 'react-native';
-const Stack = createStackNavigator();
+import { db } from '../config/firebase';
+import { dd } from '../App/JoinRoom';
+import {   ref, set } from "firebase/database";
 
+const Stack = createStackNavigator();
+function handleSOSClick() {
+  set(ref(db, `rooms/${dd}/sos`), 1)
+  alert('SOS alert send')
+}
 export const AppStack = () => {
   return (
     <Stack.Navigator>
@@ -17,7 +24,7 @@ export const AppStack = () => {
       <Stack.Screen name='Room' component={Room} options={{
           headerRight: () => (
             <Button
-              onPress={() => alert('SOS alert send')}
+              onPress={handleSOSClick }
               title="SOS"
               color="#ff0000"
             />

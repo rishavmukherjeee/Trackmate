@@ -28,6 +28,9 @@ export default {
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID
+    },
+    android: {
+      permissions: ['NOTIFICATIONS']
     }
   }
 };
