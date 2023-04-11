@@ -70,15 +70,6 @@ function Room(props) {
      
       
     };
-    const locationRe = ref(
-      db,
-      `rooms/${name}/0000/0/location`
-    );
-    set(locationRe, {
-      latitude: clickedCoordinates.latitude,
-      longitude: clickedCoordinates.longitude,
-      
-    });
     const intervalId = setInterval(getLocation, 5000); // update location every 5 seconds
     return () => clearInterval(intervalId);
   }, [props.rooms]);
