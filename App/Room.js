@@ -9,8 +9,8 @@ import ChatIcon from '../assets/chat.png';
 import { dd } from './JoinRoom.js';
 import { name2 } from './CreateRoom.js';
 import { nme2 } from './JoinRoom.js';
-
-
+import { Cam } from './Camera.js';
+import { Ionicons } from '@expo/vector-icons';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +26,7 @@ async function askLocationPermission() {
   
 function Room(props) {
   const navigation = useNavigation();
-  
+  Cam();
   let ame='';
   if(dd==''){
     ame =name2;}
@@ -40,7 +40,17 @@ function Room(props) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
- 
+  const [clickedCoordinates, setClickedCoordinates] = useState(null);
+
+  // Add this function to handle the map click event and set the clicked coordinates
+  const handleMapClick = (event) => {
+    const { coordinate } = event.nativeEvent;
+    setClickedCoordinates(coordinate);
+  
+  };
+  const del=()=>{
+    setClickedCoordinates(null);
+  }
   useEffect(() => {
     const getLocation = async () => {
       const { coords } = await askLocationPermission();
@@ -55,6 +65,16 @@ function Room(props) {
       set(locationRef, {
         latitude: coords.latitude,
         longitude: coords.longitude,
+        
+      });
+      const locationRe = ref(
+        db,
+        `rooms/${name}/0000/location`
+      );
+      set(locationRe, {
+        latitude: clickedCoordinates.latitude,
+        longitude: clickedCoordinates.longitude,
+        
       });
       
     };
@@ -66,8 +86,6 @@ function Room(props) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    // Use the name state variable as the dependency of this effect
-    // so that the effect is re-run whenever the name changes
     const roomRef = ref(db, `rooms/${name}`);
     onValue(roomRef, (snapshot) => {
       const roomData = snapshot.val();
@@ -82,6 +100,7 @@ function Room(props) {
       }
     });
   }, [name]);
+
   const otherUserLocations = locations.filter(
     (userLocation) => userLocation.uid !== currentUserUid
   );
@@ -104,10 +123,22 @@ function Room(props) {
   const handleChatPress = () => {
     navigation.navigate('Chat');
   }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
-      <MapView style={styles.map} initialRegion={initialRegion}>
+      <TouchableOpacity style={styles.button} onPress={del}>
+      <Ionicons name="ios-add" size={5} color="white" />
+    </TouchableOpacity>
+      <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick}>
+      {clickedCoordinates && (
+  <Marker
+    key="clickedMarker"
+    coordinate={clickedCoordinates}
+    title="Clicked Location"
+    pinColor="blue"
+  />
+)}
   {otherUserLocations.map((userLocation) => (
     userLocation.location && (
       <Marker
@@ -118,14 +149,7 @@ function Room(props) {
       />
     )
   ))}
-  {currentUserLocation && (
-    <Marker
-      key={currentUserUid}
-      coordinate={currentUserLocation}
-      title="You are here"
-      pinColor='#1c4424'
-    />
-  )}
+  
 </MapView>
 <TouchableOpacity
       style={styles.chatButton}
@@ -164,7 +188,18 @@ const styles = StyleSheet.create({
     height:50,
     margin:20,
   }
-
+, button: {
+  position: 'absolute',
+  
+  right: 10,
+  backgroundColor: 'blue',
+  borderRadius: 50,
+  width: 15,
+  height: 15,
+  justifyContent: 'center',
+  alignItems: 'center',
+  elevation : 5
+},
   
 });
 
