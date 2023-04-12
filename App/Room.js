@@ -118,16 +118,14 @@ function Room(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
-      <TouchableOpacity style={styles.button} onPress={del}>
-      <Ionicons name="ios-add" size={5} color="white" />
-    </TouchableOpacity>
+      
       <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick}>
       {clickedCoordinates && (
   <Marker
     key="clickedMarker"
     coordinate={clickedCoordinates}
     title="Clicked Location"
-    pinColor="blue"
+    pinColor="#003566"
   />
 )}
   {otherUserLocations.map((userLocation) => (
@@ -142,6 +140,9 @@ function Room(props) {
   ))}
   
 </MapView>
+<TouchableOpacity style={styles.button} onPress={del}>
+<Text style={styles.smallText2}>Reset waypoint</Text>
+    </TouchableOpacity>
 <TouchableOpacity
       style={styles.chatButton}
       onPress={handleChatPress}
@@ -165,10 +166,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 1,
   },
+  smallText2: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color:"white",
+    margin: 1,
+  },
   chatButton: {
     position: 'absolute',
     elevation: 5,
     width: 20,
+    top:10,
     height: 20,
     resizeMode: 'contain'
   },
@@ -181,12 +190,13 @@ const styles = StyleSheet.create({
   }
 , button: {
   position: 'absolute',
-  
-  right: 10,
+  marginLeft:10,
+  marginTop:10,
+  padding:10,
   backgroundColor: 'blue',
   borderRadius: 50,
-  width: 15,
-  height: 15,
+  width:65,
+  height:55,
   justifyContent: 'center',
   alignItems: 'center',
   elevation : 5

@@ -18,10 +18,10 @@
     import React, { useState, useEffect } from 'react';
     import { Text, View } from 'react-native';
     import { Camera, requestCameraPermissionsAsync } from 'expo-camera';
-import { db, storage } from '../config/firebase';
-import { push } from 'firebase/database';
-import { ref } from 'firebase/storage';
-    
+    import { db, storage } from '../config/firebase';
+    import { push } from 'firebase/database';
+    import { ref } from 'firebase/storage';
+        
     function Cam(){
       const [hasPermission, setHasPermission] = useState(null);
       const [type, setType] = useState(Camera.Constants.Type.back);
