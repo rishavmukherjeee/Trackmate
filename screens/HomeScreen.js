@@ -41,6 +41,9 @@ const HomeScreen = () => {
       <View>
       <Text>Travel recommendations:</Text>
      
+    <TouchableOpacity style={styles.button} onPress={navigation.navigate('trav')}>
+      <Text style={styles.buttonText}>Travel</Text>
+    </TouchableOpacity>
     </View>
     </View>
   );

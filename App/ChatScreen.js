@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet,Linking } from 'react-native';
 import { auth } from '../config/firebase';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
-
 import { dd } from './JoinRoom';
 const db = getDatabase();
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const handleCameraRedirect = () => {
+  Linking.openURL('https://www.rapidtables.com/tools/camera.html');
+}
 
 function Message({ item }) {
   const isCurrentUser = item.user === auth.currentUser.email;
@@ -66,7 +68,7 @@ function Message({ item }) {
         keyExtractor={(item) => item.id}
       />
       <View style={styles.inputContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity  onPress={handleCameraRedirect}>
           <Icon name="camera" size={25} color="#999" style={styles.cameraIcon} />
         </TouchableOpacity>
         <TextInput
