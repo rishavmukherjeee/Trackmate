@@ -47,18 +47,18 @@ function Room(props) {
     const { coordinate } = event.nativeEvent;
     if(coordinate)
     {setClickedCoordinates(coordinate);
-    push(ref(db, `rooms/${dd}/location`),coordinate);}
+    set(ref(db, `rooms/${dd}/location`),coordinate);}
     else{
       onValue(ref(db, `rooms/${dd}/location`), (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          setClickedCoordinates(Object.values(data));
-        }})
+       
+          setClickedCoordinates(snapshot);
+        })
  
       }
   };
   const del=()=>{
     setClickedCoordinates(null);
+    set(ref(db, `rooms/${dd}/location`),null);
   }
   useEffect(() => {
     const getLocation = async () => {
