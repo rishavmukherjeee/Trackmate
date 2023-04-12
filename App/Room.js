@@ -11,6 +11,7 @@ import { name2 } from './CreateRoom.js';
 import { nme2 } from './JoinRoom.js';
 import { Cam } from './Camera.js';
 import { Ionicons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -140,7 +141,12 @@ function Room(props) {
   const handleChatPress = () => {
     navigation.navigate('Chat');
   }
-  
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(dd);
+  };
+  const jail=()=>{
+    copyToClipboard()
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
@@ -174,6 +180,9 @@ function Room(props) {
       onPress={handleChatPress}
     >
       <Image source={ChatIcon} style={styles.chatIcon} />
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.button2} onPress={jail}>
+      <Text style={styles.smallText2} >Share</Text>
     </TouchableOpacity>
     </View>
   );
@@ -228,7 +237,20 @@ const styles = StyleSheet.create({
   alignItems: 'center',
   elevation : 5
 },
-  
+button2:{
+  top:500,
+  left:40,
+  position: 'absolute',
+  marginLeft:10,
+  padding:10,
+  backgroundColor: 'pink',
+  borderRadius: 50,
+  width:65,
+  height:55,
+  justifyContent: 'center',
+  alignItems: 'center',
+  elevation : 5,
+}
 });
 
 export default Room;

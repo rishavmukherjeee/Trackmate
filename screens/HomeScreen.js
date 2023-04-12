@@ -40,10 +40,10 @@ const HomeScreen = () => {
       <Button title='Sign Out' onPress={handleLogout} />
       <View>
       <Text>Travel recommendations:</Text>
-     
-    <TouchableOpacity style={styles.button} onPress={navigation.navigate('trav')}>
-      <Text style={styles.buttonText}>Travel</Text>
-    </TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={navigation.navigate('Trav')}>
+
+     </TouchableOpacity>
+   
     </View>
     </View>
   );

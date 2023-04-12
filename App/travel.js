@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
-
+import { View, Text, TouchableOpacity, Image,Linking } from "react-native";
+import i1 from '../assets/i1.bmp'
+function cl(){
+    
+  Linking.openURL('https://www.google.com/search?sxsrf=APwXEddGhkC1h-UmQjVucxjVL6Ih4fyp8w:1681299654520&q=Howrah+Bridge&stick=H4sIAAAAAAAAAONgFuLQz9U3SC4rt1TiBLFMS4pNK7UUs5Ot9HPykxNLMvPz4AyrxJKSosRkELN4ESuvR355UWKGglNRZkp6KgCZE52mSgAAAA&sa=X&ved=2ahUKEwjsp6yloaT-AhVXRmwGHcIdDMQQ2coHegQIExAB&biw=1536&bih=746&dpr=1.25');
+}
 const travel = () => {
   const [places, setPlaces] = useState([]);
 
@@ -15,7 +19,7 @@ const travel = () => {
       );
       setPlaces(placesData);
     } catch (error) {
-      console.error(error);
+      console.log("error");
     }
   };
 
@@ -25,9 +29,12 @@ const travel = () => {
 
   return (
     <View>
-      {places.map((place) => (
-        <Text key={place.id}>{place.name}</Text>
-      ))}
+      <TouchableOpacity
+      onPress={cl}
+      
+    >
+      <Image source={i1} style={{width:500,height:500,}} />
+    </TouchableOpacity>
     </View>
   );
 };
