@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View ,Text, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
-import { ref, set ,onValue } from 'firebase/database';
+import { ref, set ,onValue, push } from 'firebase/database';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 import ChatIcon from '../assets/chat.png';
@@ -45,8 +45,17 @@ function Room(props) {
   // Add this function to handle the map click event and set the clicked coordinates
   const handleMapClick = (event) => {
     const { coordinate } = event.nativeEvent;
-    setClickedCoordinates(coordinate);
-  
+    if(coordinate)
+    {setClickedCoordinates(coordinate);
+    push(ref(db, `rooms/${dd}/location`),coordinate);}
+    else{
+      onValue(ref(db, `rooms/${dd}/location`), (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setClickedCoordinates(Object.values(data));
+        }})
+ 
+      }
   };
   const del=()=>{
     setClickedCoordinates(null);
@@ -183,10 +192,11 @@ const styles = StyleSheet.create({
   },
   chatIcon:{
     borderRadius:10,
-    marginVertical:599,
+    position: 'absolute',
     width:50,
     height:50,
-    margin:20,
+    marginLeft:10,
+    marginVertical:599,
   }
 , button: {
   position: 'absolute',
