@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Button ,Text} from 'react-native';
+import { View, StyleSheet, Button ,Text,TouchableOpacity} from 'react-native';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config';
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from '../components';
 import { Images,Colors} from '../config';
-
 import getRandomName from '../App/getRandomName';
 let name = getRandomName(9);
 
@@ -39,6 +38,10 @@ const HomeScreen = () => {
 
       </View>
       <Button title='Sign Out' onPress={handleLogout} />
+      <View>
+      <Text>Travel recommendations:</Text>
+     
+    </View>
     </View>
   );
 };
@@ -60,7 +63,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginVertical: 10,
     width: '80%'
-  }
+  },button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 export {HomeScreen}
 export{name}

@@ -38,6 +38,7 @@ export const AppStack = () => {
           ),
         }}/>
         <Stack.Screen name='Chat' component={ChatScreen} />
+        
     </Stack.Navigator>
   );
 };
