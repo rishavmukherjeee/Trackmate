@@ -41,7 +41,23 @@ function Room(props) {
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
-
+  useEffect(() => {
+    const roomRe = ref(db, `rooms/${dd}/sos`);
+    const help = ref(db, `rooms/${dd}/sosuid`);
+    onValue(roomRe, (snapshot) => {
+      const sosValue = snapshot.val(); // get the value of sos from the snapshot object
+      if (sosValue === 1) { // extract the value of the sosuid property from the snapshot object
+        onValue(help,(snapshot)=>{
+          const uval =snapshot.val();
+          
+        alert(`Help required with UID: ${uval}`);
+        })
+        set(ref(db, `rooms/${dd}/sos`), 0);
+      }
+    });
+  }, [dd]);
+  
+  
   // Add this function to handle the map click event and set the clicked coordinates
   useEffect(() => {
     const roomRef = ref(db, `rooms/${dd}/location`); // use the room ID from props
