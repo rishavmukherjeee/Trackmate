@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { auth } from '../config/firebase';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
+
 import { dd } from './JoinRoom';
 const db = getDatabase();
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 function Message({ item }) {
   const isCurrentUser = item.user === auth.currentUser.email;
@@ -48,6 +51,8 @@ function Message({ item }) {
     }
   }
 
+
+ 
   function renderItem({ item }) {
     return <Message item={item} />;
   }
@@ -61,6 +66,9 @@ function Message({ item }) {
         keyExtractor={(item) => item.id}
       />
       <View style={styles.inputContainer}>
+        <TouchableOpacity>
+          <Icon name="camera" size={25} color="#999" style={styles.cameraIcon} />
+        </TouchableOpacity>
         <TextInput
           value={message}
           onChangeText={setMessage}
@@ -70,6 +78,7 @@ function Message({ item }) {
         <TouchableOpacity onPress={sendMessage}>
           <Text style={styles.sendButton}>Send</Text>
         </TouchableOpacity>
+        
       </View>
     </View>
   );
@@ -82,6 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+  
   messagesContainer: {
     flex: 1,
   },
@@ -117,6 +127,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#eee',
     padding: 10,
+  },
+  cameraIcon: {
+    marginRight: 10,
   },
   input: {
     flex: 1,
