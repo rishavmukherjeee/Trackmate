@@ -43,18 +43,19 @@ function Room(props) {
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
 
   // Add this function to handle the map click event and set the clicked coordinates
+  useEffect(() => {
+    const roomRef = ref(db, `rooms/${dd}/location`); // use the room ID from props
+    onValue(roomRef, (snapshot) => {
+      setClickedCoordinates(snapshot.val());
+    });
+  }, [dd]);
+
   const handleMapClick = (event) => {
     const { coordinate } = event.nativeEvent;
-    if(coordinate)
-    {setClickedCoordinates(coordinate);
-    set(ref(db, `rooms/${dd}/location`),coordinate);}
-    else{
-      onValue(ref(db, `rooms/${dd}/location`), (snapshot) => {
-       
-          setClickedCoordinates(snapshot);
-        })
- 
-      }
+    if (coordinate) {
+      setClickedCoordinates(coordinate);
+      set(ref(db, `rooms/${dd}/location`), coordinate);
+    }
   };
   const del=()=>{
     setClickedCoordinates(null);
