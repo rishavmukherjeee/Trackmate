@@ -239,11 +239,11 @@ const styles = StyleSheet.create({
 },
 button2:{
   top:500,
-  left:40,
+  right:10,
   position: 'absolute',
   marginLeft:10,
   padding:10,
-  backgroundColor: 'pink',
+  backgroundColor: '#606C38',
   borderRadius: 50,
   width:65,
   height:55,

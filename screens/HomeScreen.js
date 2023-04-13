@@ -18,7 +18,9 @@ const HomeScreen = () => {
     navigation.navigate('Create')
     console.log('Creating a new room...');
   };
-  
+  const clk = () => {
+    navigation.navigate('Trav')
+  };
   const handleJoinRoom = () => {
     navigation.navigate('Join');
     console.log('Joining a room...');
@@ -40,7 +42,7 @@ const HomeScreen = () => {
       <Button title='Sign Out' onPress={handleLogout} />
       <View>
       <Text>Travel recommendations:</Text>
-     <TouchableOpacity style={styles.button} onPress={navigation.navigate('Trav')}>
+     <TouchableOpacity style={styles.button} onPress={clk}>
 
      </TouchableOpacity>
    
@@ -66,7 +68,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginVertical: 10,
     width: '80%'
-  },button: {
+  },
+  button: {
     backgroundColor: '#007AFF',
     borderRadius: 8,
     paddingVertical: 10,

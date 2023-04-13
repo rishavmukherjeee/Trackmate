@@ -21,6 +21,7 @@ const travel = () => {
     } catch (error) {
       console.log("error");
     }
+    
   };
 
   useEffect(() => {
