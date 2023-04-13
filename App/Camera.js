@@ -19,7 +19,7 @@
     import { Text, View } from 'react-native';
     import { Camera, requestCameraPermissionsAsync } from 'expo-camera';
     import { db, storage } from '../config/firebase';
-    import { push } from 'firebase/database';
+    import { push, set } from 'firebase/database';
     import { ref } from 'firebase/storage';
         
     function Cam(){
@@ -55,7 +55,7 @@
             const storageRef = ref(storage, `rooms/photos/${filename}`);
             await storageRef.put(blob);
             const url = await getDownloadURL(storageRef);
-            push(ref(db, 'rooms/photos'), url);
+            set(ref(db, 'rooms/photos'), url);
             console.log("uploaded")
           };
           uploadPhoto(photo);

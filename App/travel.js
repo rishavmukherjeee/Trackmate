@@ -5,7 +5,7 @@ function cl(){
     
   Linking.openURL('https://www.google.com/search?sxsrf=APwXEddGhkC1h-UmQjVucxjVL6Ih4fyp8w:1681299654520&q=Howrah+Bridge&stick=H4sIAAAAAAAAAONgFuLQz9U3SC4rt1TiBLFMS4pNK7UUs5Ot9HPykxNLMvPz4AyrxJKSosRkELN4ESuvR355UWKGglNRZkp6KgCZE52mSgAAAA&sa=X&ved=2ahUKEwjsp6yloaT-AhVXRmwGHcIdDMQQ2coHegQIExAB&biw=1536&bih=746&dpr=1.25');
 }
-const travel = () => {
+const Travel = () => {
   const [places, setPlaces] = useState([]);
 
   const getRecommendedPlaces = async () => {
@@ -40,4 +40,4 @@ const travel = () => {
   );
 };
 
-export { travel};
+export { Travel};

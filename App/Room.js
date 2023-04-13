@@ -12,6 +12,7 @@ import { nme2 } from './JoinRoom.js';
 import { Cam } from './Camera.js';
 import { Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
+import { Button } from '../components/Button.js';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -184,6 +185,7 @@ function Room(props) {
     <TouchableOpacity style={styles.button2} onPress={jail}>
       <Text style={styles.smallText2} >Share</Text>
     </TouchableOpacity>
+    
     </View>
   );
 }

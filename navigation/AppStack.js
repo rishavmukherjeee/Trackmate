@@ -9,7 +9,7 @@ import { Button,Linking } from 'react-native';
 import { auth, db } from '../config/firebase';
 import { dd } from '../App/JoinRoom';
 import {   ref, set } from "firebase/database";
-import { travel } from '../App/travel';
+import { Travel } from '../App/travel';
 
 const Stack = createStackNavigator();
 
@@ -39,7 +39,7 @@ export const AppStack = () => {
           ),
         }}/>
         <Stack.Screen name='Chat' component={ChatScreen} />
-      <Stack.Screen name='Trav' component={travel} />
+      <Stack.Screen name='Trav' component={Travel} />
 
         
     </Stack.Navigator>

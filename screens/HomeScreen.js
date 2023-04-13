@@ -41,9 +41,9 @@ const HomeScreen = () => {
       </View>
       <Button title='Sign Out' onPress={handleLogout} />
       <View>
-      <Text>Travel recommendations:</Text>
+    
      <TouchableOpacity style={styles.button} onPress={clk}>
-
+     <Text>Travel recommendations</Text>
      </TouchableOpacity>
    
     </View>
