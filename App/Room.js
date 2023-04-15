@@ -162,7 +162,7 @@ function Room(props) {
   const shareMessage = async (message) => {
     try {
       const shareOptions = {
-        message: `Join My Room Now: ${message} \n\nDownload TrackMate app Today: https://play.google.com/store`,
+        message: `Join My Room Now: ${message} \n\nDownload TrackMate app Today: https://github.com/rishavmukherjeee/Location`,
       };
       
   
@@ -172,7 +172,7 @@ function Room(props) {
           // shared with activity type of result.activityType
         } else {
           if (Platform.OS === 'android' && Platform.Version < 26) {
-            Alert.alert('Friends Invited!');
+            Alert.alert('Sharing');
           } else {
             ToastAndroid.show('Friends Invited!', ToastAndroid.SHORT);
           }
@@ -190,8 +190,16 @@ function Room(props) {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.smallText}>Room id:   {name}</Text>
+       <TouchableOpacity  onPress={jail}>
+      <Text style={styles.smallText}>Room id:   {name }  
+     <Text style={styles.smallText}>    </Text>
+       <Icon name="share-alt" color="black" size={12}></Icon>
+       </Text>
+       </TouchableOpacity>
       
+        
+      
+     
       <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick}>
       {clickedCoordinates && (
   <Marker
@@ -239,10 +247,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   smallText: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center',
-    margin: 1,
+    margin: 3,
+    borderBottomColor: '#003566',
+    borderBottomWidth:2,
   },
   smallText2: {
     fontSize: 10,

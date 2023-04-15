@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet,Linking } from 'react-native';
 import { auth } from '../config/firebase';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { dd } from './JoinRoom';
+import { dd, nme2 } from './JoinRoom';
 const db = getDatabase();
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,15 +14,18 @@ function Message({ item }) {
   const isCurrentUser = item.user === auth.currentUser.email;
   return (
     <View style={[styles.message, isCurrentUser ? styles.currentUserMessage : null]}>
-      <Text style={[styles.text, isCurrentUser ? styles.currentUserText : null]}>
-        {item.text}
-      </Text>
-      <Text style={[styles.date, isCurrentUser ? styles.currentUserDate : null]}>
-        {new Date(item.createdAt).toLocaleTimeString()}
-      </Text>
       <Text style={[styles.user]}>
         {item.user}
       </Text>
+      <Text style={[styles.text, isCurrentUser ? styles.currentUserText : null]}>
+        {item.text}
+        </Text>
+      <Text style={[styles.date, isCurrentUser ? styles.currentUserDate : null]}>
+        {new Date(item.createdAt).toLocaleTimeString()}
+       
+      
+      </Text>
+      
     </View>
   );
 }
@@ -41,11 +44,13 @@ function Message({ item }) {
   }, []);
 
   function sendMessage() {
+   /* onValue(ref(db, `rooms/${dd}/${uid}`), (snapshot) => {
+      const namee = snapshot.val();})*/
     if (message.trim()) {
       const newMessage = {
         id: Date.now().toString(),
         text: message.trim(),
-        user: auth.currentUser.email,
+        user: nme2,
         createdAt: new Date().toISOString(),
       };
       push(ref(db, `rooms/${dd}/messages`), newMessage);
@@ -109,9 +114,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   date: {
-    fontSize: 12,
+    fontSize: 8,
     color: '#666',
-    marginTop: 5,
+    
+    marginLeft: 5,
     alignSelf: 'flex-end',
   },
   currentUserMessage: {
@@ -145,9 +151,11 @@ const styles = StyleSheet.create({
     color: 'blue',}
     ,
     user:{
-      fontSize: 10,
-      color: '#666',
-      alignSelf: 'flex-end',
+      fontSize: 12,
+      color: 'green',
+      textDecorationStyle: 'solid',
+      underline: true,
+      alignSelf: 'flex-start',
     }
   })
 export {ChatScreen};

@@ -18,7 +18,7 @@ console.log(name); // e.g. "adjvnj3jnj35uojb"
     const newRoomRef = ref(db, `rooms/${name}`);
     set(newRoomRef, {
       
-      user:yname,
+      roomname:yname,
       
     })
     .then(() => {
