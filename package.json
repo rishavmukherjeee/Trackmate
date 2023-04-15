@@ -22,6 +22,7 @@
     "expo-location": "~14.3.0",
     "expo-notifications": "~0.16.1",
     "expo-permissions": "~13.2.0",
+    "expo-sharing": "~10.3.0",
     "firebase": "9.6.11",
     "formik": "2.1.4",
     "geolib": "^3.3.3",
