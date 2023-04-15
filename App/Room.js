@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View ,Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View ,Text, TouchableOpacity, Image,Share,ToastAndroid,Alert,Platform} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue, push } from 'firebase/database';
@@ -11,8 +11,10 @@ import { name2 } from './CreateRoom.js';
 import { nme2 } from './JoinRoom.js';
 import { Cam } from './Camera.js';
 import { Ionicons } from '@expo/vector-icons';
+import * as Sharing from 'expo-sharing';
 import * as Clipboard from 'expo-clipboard';
-import { Button } from '../components/Button.js';
+import * as FileSystem from 'expo-file-system';
+import Icon from 'react-native-vector-icons/FontAwesome';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -145,9 +147,47 @@ function Room(props) {
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(dd);
   };
+  async function shareRoomId() {
+    try {
+      const documentDirectory = FileSystem.documentDirectory;
+      const fileName = 'room.txt';
+      const content = 'Join my room with ID ' + dd;
+      const filePath = documentDirectory + fileName;
+      await FileSystem.writeAsStringAsync(filePath, content, { encoding: FileSystem.EncodingType.UTF8 });
+      await Sharing.shareAsync(filePath);
+    } catch (error) {
+      console.log('Error sharing message: ', error);
+    }
+  }
+  const shareMessage = async (message) => {
+    try {
+      const shareOptions = {
+        message: `Join My Room Now: ${message} \n\nDownload TrackMate app Today: https://play.google.com/store`,
+      };
+      
+  
+      const result = await Share.share(shareOptions);
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          if (Platform.OS === 'android' && Platform.Version < 26) {
+            Alert.alert('Friends Invited!');
+          } else {
+            ToastAndroid.show('Friends Invited!', ToastAndroid.SHORT);
+          }
+        }
+      } else if (result.action === Share.dismissedAction) {
+        ToastAndroid.show('Sharing cancelled', ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const jail=()=>{
-    copyToClipboard()
-  }
+    copyToClipboard();
+    shareMessage(dd)
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.smallText}>Room id:   {name}</Text>
@@ -184,6 +224,7 @@ function Room(props) {
     </TouchableOpacity>
     <TouchableOpacity style={styles.button2} onPress={jail}>
       <Text style={styles.smallText2} >Share</Text>
+      <Icon name="share-alt" color="black" size={20}></Icon>
     </TouchableOpacity>
     
     </View>
@@ -240,15 +281,15 @@ const styles = StyleSheet.create({
   elevation : 5
 },
 button2:{
-  top:500,
+  top:600,
   right:10,
   position: 'absolute',
   marginLeft:10,
   padding:10,
   backgroundColor: '#606C38',
   borderRadius: 50,
-  width:65,
-  height:55,
+  width:67,
+  height:60,
   justifyContent: 'center',
   alignItems: 'center',
   elevation : 5,
