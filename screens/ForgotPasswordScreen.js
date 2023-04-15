@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, ImageBackground } from 'react-native';
 import { Formik } from 'formik';
 import { sendPasswordResetEmail } from 'firebase/auth';
 
@@ -22,6 +22,10 @@ export const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground
+    source={require('../assets/back3.png')}
+    style={styles.background}
+    >
     <View isSafe style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.screenTitle}>Reset your password</Text>
@@ -72,14 +76,19 @@ export const ForgotPasswordScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('Login')}
       />
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c4424',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 12
+  }, background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   innercontainer: {
     alignItems: 'center'
