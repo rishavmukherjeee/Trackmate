@@ -1,43 +1,115 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Image,Linking } from "react-native";
-import i1 from '../assets/i1.bmp'
-function cl(){
-    
-  Linking.openURL('https://www.google.com/search?sxsrf=APwXEddGhkC1h-UmQjVucxjVL6Ih4fyp8w:1681299654520&q=Howrah+Bridge&stick=H4sIAAAAAAAAAONgFuLQz9U3SC4rt1TiBLFMS4pNK7UUs5Ot9HPykxNLMvPz4AyrxJKSosRkELN4ESuvR355UWKGglNRZkp6KgCZE52mSgAAAA&sa=X&ved=2ahUKEwjsp6yloaT-AhVXRmwGHcIdDMQQ2coHegQIExAB&biw=1536&bih=746&dpr=1.25');
+import { View, Text, FlatList, StyleSheet, Linking, Image} from "react-native";
+import * as Location from 'expo-location';
+import { TouchableOpacity } from "react-native-gesture-handler";
+async function askLocationPermission() {
+  
+  let { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== 'granted') {
+    setErrorMsg('Permission to access location was denied');
+    return;
+  }
+  
+  let location = await Location.getCurrentPositionAsync({});
+  return location;
 }
 const Travel = () => {
   const [places, setPlaces] = useState([]);
 
-  const getRecommendedPlaces = async () => {
+  const getNearbyPlaces = async () => {
     try {
-      const response = await fetch(
-        `https://api.foursquare.com/v2/venues/explore?near=New%20York%20City&client_id=WQJUVZO53ZKUSYT22SGZCP0U3Y3GDGUWJ5UNG0VNO3I5PDK2&client_secret=AONM4BEHOB4JIBZRPRMB2E54A1GD55ZS02H5FY543W5S45L5&v=20230412`
-      );
+      const { coords } = await askLocationPermission();
+      const url = `https://nominatim.openstreetmap.org/search.php?q=tourist+attraction&lat=${coords.latitude}&lon=${coords.longitude}&format=json`;
+      const response = await fetch(url);
       const responseJson = await response.json();
-      const placesData = responseJson.response.groups[0].items.map(
-        (item) => item.venue
-      );
-      setPlaces(placesData);
+      setPlaces(responseJson);
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
-    
   };
 
   useEffect(() => {
-    getRecommendedPlaces();
+    getNearbyPlaces();
+
+    const subscription = Location.watchPositionAsync({}, (location) => {
+      // Update the places list when the user's location changes
+      getNearbyPlaces();
+    });
+
+    return () => {
+      subscription.remove();
+    };
   }, []);
+  const handlePress = (item) => {
+    const { lat, lon } = item;
+    const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+    Linking.openURL(url);
+  }
+
+  const renderPlace = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => handlePress(item)}>
+        <View style={styles.placeContainer}>
+          <Image source={{ uri: item.image }} style={styles.placeImage} />
+          <View style={styles.placeDetailsContainer}>
+            <Text style={[styles.placeName, { flex: 1 }]}>{item.display_name}</Text>
+            <Text style={styles.placeAddress}>{item.address}</Text>
+            <Text style={styles.placeDistance}>{item.distance} km away</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+  
 
   return (
-    <View>
-      <TouchableOpacity
-      onPress={cl}
-      
-    >
-      <Image source={i1} style={{width:500,height:500,}} />
-    </TouchableOpacity>
+    <View style={styles.container}>
+      {places.length === 0 ? (
+        <Text>Loading...</Text>
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            data={places}
+            renderItem={renderPlace}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          
+        </View>
+      )}
     </View>
   );
 };
 
-export { Travel};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  flatListContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  placeContainer: {
+    width: '90%',
+    marginVertical: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    overflow: 'hidden',
+    
+  },
+  placeDetailsContainer: {
+      flex: 1,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+  },
+  placeName: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      color: '#333',
+  },
+});
+
+export { Travel };
