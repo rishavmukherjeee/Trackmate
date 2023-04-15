@@ -46,6 +46,7 @@ function Room(props) {
   const [currentUserUid, setCurrentUserUid] = useState(null);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
   const [locked, setLocked] = useState(false);
+  const [title, setTitle] = useState([]);
   function handleMarkerPress() {
     if(!locked)
     setLocked(true);
@@ -195,6 +196,14 @@ function Room(props) {
     copyToClipboard();
     shareMessage(dd)
   }
+  /*{onValue(
+        ref(db, `rooms/${dd}/${userLocation.uid}/username`),
+        (snapshot) => {
+          
+          console.log(snapshot.val());
+           snapshot.val()||"unknown";
+        }
+      )} */
   return (
 
       <View style={styles.container} >
@@ -220,15 +229,18 @@ function Room(props) {
   />
 )}
   {otherUserLocations.map((userLocation) => (
-    userLocation.location && (
-      <Marker
-        key={userLocation.uid}
-        coordinate={userLocation.location}
-        title={userLocation.uid}
-        
-      />
-    )
-  ))}
+  userLocation.location &&  (
+    
+    <Marker
+      key={userLocation.uid}
+      coordinate={userLocation.location}
+      
+      title={userLocation.uid}
+    />
+  
+  )
+))}
+
   
 </MapView>
 
