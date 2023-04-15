@@ -189,7 +189,8 @@ function Room(props) {
     shareMessage(dd)
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
+      <View style={styles.container} >
        <TouchableOpacity  onPress={jail}>
       <Text style={styles.smallText}>Room id:   {name }  
      <Text style={styles.smallText}>    </Text>
@@ -200,8 +201,9 @@ function Room(props) {
         
       
      
-      <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick}>
+      <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick} >
       {clickedCoordinates && (
+  
   <Marker
     key="clickedMarker"
     coordinate={clickedCoordinates}
@@ -224,10 +226,11 @@ function Room(props) {
 
     
     
-<TouchableOpacity  >
+
+    </View>
+    <TouchableOpacity >
     <Anime />
     </TouchableOpacity>
-    
     </View>
   );
 }

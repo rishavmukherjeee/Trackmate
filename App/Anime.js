@@ -8,6 +8,7 @@ import { ref, set } from 'firebase/database';
 import { db } from '../config/firebase';
 import { dd } from './JoinRoom';
 let mapclick=0;
+
 function Anime() {
   const [animationValue, setAnimationValue] = useState(new Animated.Value(0));
   const [showButtons, setShowButtons] = useState(false);
@@ -44,7 +45,8 @@ function Anime() {
   };
 
   return (
-    <View style={styles.container}>
+    
+      <View style={styles.container} >
       <TouchableOpacity style={styles.button} onPress={handlePress} activeOpacity={0.7}>
         <AntDesign name="upcircleo" size={24} color="white" />
       </TouchableOpacity>
@@ -98,7 +100,8 @@ function Anime() {
     
         </Animated.View>
       )}
-    </View>
+      </View>
+   
   );
 }
 
@@ -139,4 +142,4 @@ const styles = StyleSheet.create({
 });
 
 export { Anime };
-export {mapclick}
+export {mapclick};
