@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Button ,Text,TouchableOpacity} from 'react-native';
+import { View, StyleSheet, ImageBackground ,Text,TouchableOpacity} from 'react-native';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config';
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from '../components';
 import { Images,Colors} from '../config';
 import getRandomName from '../App/getRandomName';
+import Icon from 'react-native-vector-icons/FontAwesome';
 let name = getRandomName(9);
 
 const HomeScreen = () => {
@@ -19,7 +20,7 @@ const HomeScreen = () => {
     console.log('Creating a new room...');
   };
   const clk = () => {
-    navigation.navigate('Trav')
+    navigation.navigate('Travel')
   };
   const handleJoinRoom = () => {
     navigation.navigate('Join');
@@ -27,27 +28,38 @@ const HomeScreen = () => {
   };
   
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/back.png')}
+      style={styles.background}
+    >
+      <View style={styles.container}>
+        <Text style={styles.smoltext}>TrackMate</Text>
       <View style={styles.logoContainer}>
             <Logo uri={Images.map} />
-            <Text style={styles.screenTitle}>      Rooms!</Text>
-          </View>
-      <View style={styles.buttonContainer}>
-        <Button title='Create Room' onPress={handleCreateRoom} />
+            <View>
+              <Text style={styles.screenTitle}>WELCOME!</Text>
+            </View>
+    
       </View>
-      <View style={styles.buttonContainer}>
-        <Button title='Join Room' onPress={handleJoinRoom} />
-
-      </View>
-      <Button title='Sign Out' onPress={handleLogout} />
+      <TouchableOpacity onPress={handleCreateRoom}style={styles.button3}>
+        <Text style={styles.buttonText2}><Icon name="plus" color="white" size={12}></Icon> Create Room</Text>
+      </TouchableOpacity>
+        <TouchableOpacity onPress={handleJoinRoom} style={styles.button3}>
+        <Text style={styles.buttonText2}><Icon name="users" color="white"/> Join Room</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleLogout} style={styles.buttonred}>
+          <Text style={styles.buttonText}><Icon name="sign-out"/>Sign Out</Text>
+          </TouchableOpacity>
       <View>
     
      <TouchableOpacity style={styles.button} onPress={clk}>
-     <Text>Travel recommendations</Text>
+     <Text style={styles.buttonText}><Icon name="globe"/> Travel recommendations</Text>
      </TouchableOpacity>
    
     </View>
     </View>
+    </ImageBackground>
+    
   );
 };
 
@@ -55,33 +67,117 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#1c4424',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+  },background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   screenTitle: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: Colors.white,
-    paddingTop: 20,
-    alignItems: 'center'
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: 'white',
+    paddingTop: 30,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
+  
   buttonContainer: {
+    color:'#FFF',
     marginVertical: 10,
     width: '80%'
   },
-  button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+  button2: {
+    backgroundColor: '#F2A007',
+    borderRadius: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     alignItems: 'center',
     marginVertical: 10,
+    elevation: 3,
+    width: '80%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
+  button3: {
+    backgroundColor: '#0077be',
+    borderRadius: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginVertical: 10,
+    elevation: 3,
+    width: '80%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  button: {
+    backgroundColor: '#F2A007',
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginVertical: 10,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  buttonred: {
+    backgroundColor: '#F0544F',
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginVertical: 10,
+    justifyContent: 'center',
+    width: '40%',
+    maxWidth: 300,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  
   buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
+    color: '#000000',
+    fontSize: 16,
     fontWeight: 'bold',
+    letterSpacing: 1,
+    textAlign: 'center'
   },
+  buttonText2: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    textAlign: 'center'
+  },
+  smoltext:{
+    top:-22,
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  }
 });
 export {HomeScreen}
 export{name}

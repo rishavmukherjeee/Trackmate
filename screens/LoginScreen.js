@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet,ImageBackground } from 'react-native';
 import { Formik } from 'formik';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, TextInput, Logo, Button, FormErrorMessage } from '../components';
 import { Images, Colors, auth } from '../config';
 import { useTogglePasswordVisibility } from '../hooks';
@@ -21,11 +21,15 @@ export const LoginScreen = ({ navigation }) => {
     );
   };
   return (
-    <>
+    <ImageBackground
+    source={require('../assets/back2.png')}
+    style={styles.background}
+    >
       <View isSafe style={styles.container}>
         <KeyboardAwareScrollView enableOnAndroid={true}>
           {/* LogoContainer: consits app logo and screen title */}
           <View style={styles.logoContainer}>
+          <Text style={styles.smoltext}>TrackMate</Text>
             <Logo uri={Images.logo} />
             <Text style={styles.screenTitle}>Welcome !!</Text>
           </View>
@@ -87,7 +91,7 @@ export const LoginScreen = ({ navigation }) => {
                 ) : null}
                 {/* Login button */}
                 <Button style={styles.button} onPress={handleSubmit}>
-                  <Text style={styles.buttonText}>Login</Text>
+                  <Text style={styles.buttonText}><Icon name="sign-in"/> Login</Text>
                 </Button>
               </>
             )}
@@ -110,17 +114,20 @@ export const LoginScreen = ({ navigation }) => {
 
       {/* App info footer */}
       
-    </>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c4424',
     paddingHorizontal: 12
+  },background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   logoContainer: {
+    marginTop:100,
     alignItems: 'center',
     width: 'auto', // Make the image width dynamic and adjust to the container widt, // Set the image height to 100% of the container height
     objectFit: 'cover',
@@ -158,7 +165,13 @@ const styles = StyleSheet.create({
   },
   borderlessButtonContainer: {
     marginTop: 16,
+    color:"black",
     alignItems: 'center',
     justifyContent: 'center'
+  },smoltext:{
+    top:-22,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 });
