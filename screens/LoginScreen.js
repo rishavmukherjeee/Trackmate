@@ -3,7 +3,7 @@ import { Text, StyleSheet,ImageBackground } from 'react-native';
 import { Formik } from 'formik';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, TextInput, Logo, Button, FormErrorMessage } from '../components';
 import { Images, Colors, auth } from '../config';
 import { useTogglePasswordVisibility } from '../hooks';
@@ -29,6 +29,7 @@ export const LoginScreen = ({ navigation }) => {
         <KeyboardAwareScrollView enableOnAndroid={true}>
           {/* LogoContainer: consits app logo and screen title */}
           <View style={styles.logoContainer}>
+          <Text style={styles.smoltext}>TrackMate</Text>
             <Logo uri={Images.logo} />
             <Text style={styles.screenTitle}>Welcome !!</Text>
           </View>
@@ -90,7 +91,7 @@ export const LoginScreen = ({ navigation }) => {
                 ) : null}
                 {/* Login button */}
                 <Button style={styles.button} onPress={handleSubmit}>
-                  <Text style={styles.buttonText}>Login</Text>
+                  <Text style={styles.buttonText}><Icon name="sign-in"/> Login</Text>
                 </Button>
               </>
             )}
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   logoContainer: {
+    marginTop:100,
     alignItems: 'center',
     width: 'auto', // Make the image width dynamic and adjust to the container widt, // Set the image height to 100% of the container height
     objectFit: 'cover',
@@ -166,5 +168,10 @@ const styles = StyleSheet.create({
     color:"black",
     alignItems: 'center',
     justifyContent: 'center'
+  },smoltext:{
+    top:-22,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 });
