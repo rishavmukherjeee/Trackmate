@@ -5,7 +5,6 @@ import { auth, db } from '../config/firebase.js';
 import { ref, set ,onValue, push } from 'firebase/database';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
-import ChatIcon from '../assets/chat.png';
 import { dd } from './JoinRoom.js';
 import { name2 } from './CreateRoom.js';
 import { nme2 } from './JoinRoom.js';
@@ -15,6 +14,7 @@ import * as Sharing from 'expo-sharing';
 import * as Clipboard from 'expo-clipboard';
 import * as FileSystem from 'expo-file-system';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Anime } from './Anime.js';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -141,9 +141,7 @@ function Room(props) {
     latitudeDelta: 0.7,
     longitudeDelta: 0.7,
   };
-  const handleChatPress = () => {
-    navigation.navigate('Chat');
-  }
+  
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(dd);
   };
@@ -224,15 +222,11 @@ function Room(props) {
 <TouchableOpacity style={styles.button} onPress={del}>
 <Text style={styles.smallText2}>Reset waypoint</Text>
     </TouchableOpacity>
-<TouchableOpacity
-      style={styles.chatButton}
-      onPress={handleChatPress}
-    >
-      <Image source={ChatIcon} style={styles.chatIcon} />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.button2} onPress={jail}>
-      <Text style={styles.smallText2} >Share</Text>
-      <Icon name="share-alt" color="black" size={20}></Icon>
+
+    
+    
+<TouchableOpacity  >
+    <Anime />
     </TouchableOpacity>
     
     </View>
@@ -261,23 +255,8 @@ const styles = StyleSheet.create({
     color:"white",
     margin: 1,
   },
-  chatButton: {
-    position: 'absolute',
-    elevation: 5,
-    width: 20,
-    top:10,
-    height: 20,
-    resizeMode: 'contain'
-  },
-  chatIcon:{
-    borderRadius:10,
-    position: 'absolute',
-    width:50,
-    height:50,
-    marginLeft:10,
-    marginVertical:599,
-  }
-, button: {
+  
+ button: {
   position: 'absolute',
   marginLeft:10,
   marginTop:10,

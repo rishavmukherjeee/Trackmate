@@ -15,7 +15,7 @@ function Message({ item }) {
   return (
     <View style={[styles.message, isCurrentUser ? styles.currentUserMessage : null]}>
       <Text style={[styles.user]}>
-        {item.user}
+        {item.user2}
       </Text>
       <Text style={[styles.text, isCurrentUser ? styles.currentUserText : null]}>
         {item.text}
@@ -50,7 +50,8 @@ function Message({ item }) {
       const newMessage = {
         id: Date.now().toString(),
         text: message.trim(),
-        user: nme2,
+        user2: nme2,
+        user:auth.currentUser.email,
         createdAt: new Date().toISOString(),
       };
       push(ref(db, `rooms/${dd}/messages`), newMessage);
