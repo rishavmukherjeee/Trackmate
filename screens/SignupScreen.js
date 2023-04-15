@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet,ImageBackground } from 'react-native';
 import { Formik } from 'formik';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, TextInput, Logo, Button, FormErrorMessage } from '../components';
 import { Images, Colors, auth } from '../config';
 import { useTogglePasswordVisibility } from '../hooks';
@@ -30,10 +30,15 @@ export const SignupScreen = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground
+    source={require('../assets/back3.png')}
+    style={styles.background}
+    >
     <View isSafe style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid={true}>
         {/* LogoContainer: consits app logo and screen title */}
         <View style={styles.logoContainer}>
+        <Text style={styles.smoltext}>TrackMate</Text>
           <Logo uri={Images.logo} />
           <Text style={styles.screenTitle}>Create a new account!</Text>
         </View>
@@ -112,7 +117,7 @@ export const SignupScreen = ({ navigation }) => {
               ) : null}
               {/* Signup button */}
               <Button style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Signup</Text>
+                <Text style={styles.buttonText}><Icon name="user-plus"/> Signup</Text>
               </Button>
             </>
           )}
@@ -126,24 +131,41 @@ export const SignupScreen = ({ navigation }) => {
         />
       </KeyboardAwareScrollView>
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c4424',
     paddingHorizontal: 12
   },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   logoContainer: {
-    alignItems: 'center'
+    marginTop:100,
+    alignItems: 'center',
+    width: 'auto', // Make the image width dynamic and adjust to the container widt, // Set the image height to 100% of the container height
+    objectFit: 'cover',
   },
   screenTitle: {
     fontSize: 32,
     fontWeight: '700',
-    color: Colors.white,
-    paddingTop: 20
+    color: 'white',
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 3,
+    shadowColor: 'rgba(0, 0, 0, 0.75)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    backgroundColor: 'transparent'
   },
+  
   button: {
     width: '100%',
     justifyContent: 'center',
@@ -161,6 +183,10 @@ const styles = StyleSheet.create({
   borderlessButtonContainer: {
     marginTop: 16,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },smoltext:{
+    top:-22,
+    color: 'black',
+    fontSize: 20,
   }
 });
