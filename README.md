@@ -5,6 +5,9 @@ It also has SOS button for alerting users
 Built Completely on react-native-expo!<br/>
 Type :
 ```
+yarn install
+```
+```
 yarn start
 ```
 to get started!<br/>
