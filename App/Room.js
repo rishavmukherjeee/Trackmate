@@ -45,7 +45,14 @@ function Room(props) {
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
-  
+  const [locked, setLocked] = useState(false);
+  function handleMarkerPress() {
+    if(!locked)
+    setLocked(true);
+    else
+    setLocked(false);
+  }
+
   useEffect(() => {
     const roomRe = ref(db, `rooms/${dd}/sos`);
     const help = ref(db, `rooms/${dd}/sosuid`);
@@ -147,7 +154,7 @@ function Room(props) {
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(dd);
   };
-  async function shareRoomId() {
+  /*async function shareRoomId() {
     try {
       const documentDirectory = FileSystem.documentDirectory;
       const fileName = 'room.txt';
@@ -158,7 +165,7 @@ function Room(props) {
     } catch (error) {
       console.log('Error sharing message: ', error);
     }
-  }
+  }*/
   const shareMessage = async (message) => {
     try {
       const shareOptions = {
@@ -189,7 +196,7 @@ function Room(props) {
     shareMessage(dd)
   }
   return (
-    <View style={styles.container} >
+
       <View style={styles.container} >
        <TouchableOpacity  onPress={jail}>
       <Text style={styles.smallText}>Room id:   {name }  
@@ -201,13 +208,14 @@ function Room(props) {
         
       
      
-      <MapView style={styles.map} initialRegion={initialRegion} onPress={handleMapClick} >
+      <MapView style={styles.map} initialRegion={initialRegion} onPress={locked?null:handleMapClick} >
       {clickedCoordinates && (
   
   <Marker
-    key="clickedMarker"
+  onPress={handleMarkerPress}
+    key="clicked marker"
     coordinate={clickedCoordinates}
-    title="Clicked Location"
+    title={locked?'unlocked':'locked'}
     pinColor="#003566"
   />
 )}
@@ -227,7 +235,7 @@ function Room(props) {
     
     
 
-    </View>
+   
     <TouchableOpacity >
     <Anime />
     </TouchableOpacity>
