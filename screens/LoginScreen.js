@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet,ImageBackground } from 'react-native';
 import { Formik } from 'formik';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -21,7 +21,10 @@ export const LoginScreen = ({ navigation }) => {
     );
   };
   return (
-    <>
+    <ImageBackground
+    source={require('../assets/back2.png')}
+    style={styles.background}
+    >
       <View isSafe style={styles.container}>
         <KeyboardAwareScrollView enableOnAndroid={true}>
           {/* LogoContainer: consits app logo and screen title */}
@@ -110,15 +113,17 @@ export const LoginScreen = ({ navigation }) => {
 
       {/* App info footer */}
       
-    </>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c4424',
     paddingHorizontal: 12
+  },background: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   logoContainer: {
     alignItems: 'center',
@@ -158,6 +163,7 @@ const styles = StyleSheet.create({
   },
   borderlessButtonContainer: {
     marginTop: 16,
+    color:"black",
     alignItems: 'center',
     justifyContent: 'center'
   }
