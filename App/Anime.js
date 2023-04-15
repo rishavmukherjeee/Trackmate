@@ -2,13 +2,27 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons ,FontAwesome5} from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ref, set } from 'firebase/database';
+import { db } from '../config/firebase';
+import { dd } from './JoinRoom';
+let mapclick=0;
 function Anime() {
   const [animationValue, setAnimationValue] = useState(new Animated.Value(0));
   const [showButtons, setShowButtons] = useState(false);
   const navigation = useNavigation();
+  
   const handleChatPress = () => {
     navigation.navigate('Chat');
+  }
+  const handleMapPress = () => {
+    if(mapclick==0){
+    mapclick=1;}
+    else{
+      mapclick=0;
+      set(ref(db, `rooms/${dd}/location`),null);
+    }
   }
   const handlePress = () => {
     setShowButtons(true);
@@ -32,7 +46,7 @@ function Anime() {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handlePress} activeOpacity={0.7}>
-        <AntDesign name="upcircleo" size={24} color="black" />
+        <AntDesign name="upcircleo" size={24} color="white" />
       </TouchableOpacity>
       {showButtons && (
         <Animated.View
@@ -56,6 +70,10 @@ function Anime() {
             },
           ]}
         >
+          <TouchableOpacity style={styles.additionalButton} onPress={hideButtons} activeOpacity={0.7}>
+            {/*Add your additional button icon or text here*/}
+            <AntDesign name="downcircleo" size={24} color="white" />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.additionalButton} onPress={() => console.log('Button 1 pressed')} activeOpacity={0.7}>
             {/*Add your additional button icon or text here*/}
             <AntDesign name="staro" size={24} color="white" />
@@ -69,12 +87,15 @@ function Anime() {
       style={styles.additionalButton} 
       onPress={handleChatPress}
     >
-      <Ionicons name="md-chatbubble-ellipses-outline" size={24} color="black" />
+      <Ionicons name="md-chatbubble-ellipses-outline" size={24} color="white" />
     </TouchableOpacity>
-    <TouchableOpacity style={styles.additionalButton} onPress={hideButtons} activeOpacity={0.7}>
-            {/*Add your additional button icon or text here*/}
-            <AntDesign name="downcircleo" size={24} color="white" />
-          </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.additionalButton} 
+      onPress={handleMapPress}
+    >
+      {mapclick==0?<FontAwesome5 name="map-marker-alt" size={24} color="white" />:<MaterialCommunityIcons name="map-marker-off" size={24} color="white" />}
+    </TouchableOpacity>
+    
         </Animated.View>
       )}
     </View>
@@ -106,6 +127,7 @@ const styles = StyleSheet.create({
   },
   additionalButton: {
     backgroundColor: 'blue',
+    
     width: 50,
     height: 50,
     borderRadius: 25,
@@ -117,3 +139,4 @@ const styles = StyleSheet.create({
 });
 
 export { Anime };
+export {mapclick}

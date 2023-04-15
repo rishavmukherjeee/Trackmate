@@ -14,7 +14,7 @@ import * as Sharing from 'expo-sharing';
 import * as Clipboard from 'expo-clipboard';
 import * as FileSystem from 'expo-file-system';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Anime } from './Anime.js';
+import { Anime ,mapclick } from './Anime.js';
 async function askLocationPermission() {
   
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -45,6 +45,7 @@ function Room(props) {
   const [errorMsg, setErrorMsg] = useState(null);
   const [currentUserUid, setCurrentUserUid] = useState(null);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
+  
   useEffect(() => {
     const roomRe = ref(db, `rooms/${dd}/sos`);
     const help = ref(db, `rooms/${dd}/sosuid`);
@@ -71,11 +72,12 @@ function Room(props) {
   }, [dd]);
 
   const handleMapClick = (event) => {
+    if(mapclick==1){
     const { coordinate } = event.nativeEvent;
     if (coordinate) {
       setClickedCoordinates(coordinate);
       set(ref(db, `rooms/${dd}/location`), coordinate);
-    }
+    }}
   };
   const del=()=>{
     setClickedCoordinates(null);
@@ -219,9 +221,6 @@ function Room(props) {
   ))}
   
 </MapView>
-<TouchableOpacity style={styles.button} onPress={del}>
-<Text style={styles.smallText2}>Reset waypoint</Text>
-    </TouchableOpacity>
 
     
     
