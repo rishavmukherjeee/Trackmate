@@ -4,7 +4,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../config';
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from '../components';
-import { Images,Colors} from '../config';
+import { Images} from '../config';
 import getRandomName from '../App/getRandomName';
 import Icon from 'react-native-vector-icons/FontAwesome';
 let name = getRandomName(9);
