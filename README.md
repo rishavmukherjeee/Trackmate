@@ -10,15 +10,14 @@ yarn install
 ```
 yarn start
 ```
-to get started!<br/>
-You will also need a .env file with all the firebase config in it</br>
+to get started!You will also need a .env file with all the firebase config in it</br>
 **Better UI**<br/>
-<div style="text-align:center"><img src="https://i.imgur.com/rOyklch.jpeg" width="400" height="700"><br/>
+<div style="text-align:center"><img src="https://i.imgur.com/rOyklch.jpeg" width="320" height="700" style="display: block; margin: 0 auto" ><br/>
 Sign-up Page<br/>
-<img src="https://i.imgur.com/wM6oCQ0.jpeg" width="400" height="700"><br/>
+<img src="https://i.imgur.com/wM6oCQ0.jpeg" width="320" height="700" style="display: block; margin: 0 auto" ><br/>
 Log-in Page<br/>
-<img src="https://i.imgur.com/HPQbXcm.jpeg" width="400" height="700"><br/>
+<img src="https://i.imgur.com/HPQbXcm.jpeg" width="320" height="700" style="display: block; margin: 0 auto" ><br/>
 Home Screen<br/>
-<img src="https://i.imgur.com/ZLAdJ1r.jpeg" width="400" height="700"><br/>
+<img src="https://i.imgur.com/ZLAdJ1r.jpeg" width="320" height="700" style="display: block; margin: 0 auto" ><br/>
 Room Page<br/>
 </div>
