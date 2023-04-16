@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet,ImageBackground } from 'react-native';
+import { Text, StyleSheet,ImageBackground, Image } from 'react-native';
 import { Formik } from 'formik';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, TextInput, Logo, Button, FormErrorMessage } from '../components';
+import { View, TextInput, Button, FormErrorMessage } from '../components';
 import { Images, Colors, auth } from '../config';
 import { useTogglePasswordVisibility } from '../hooks';
 import { loginValidationSchema } from '../utils';
@@ -30,7 +30,7 @@ export const LoginScreen = ({ navigation }) => {
           {/* LogoContainer: consits app logo and screen title */}
           <View style={styles.logoContainer}>
           <Text style={styles.smoltext}>TrackMate</Text>
-            <Logo uri={Images.logo} />
+            <Image source={Images.logo} />
             <Text style={styles.screenTitle}>Welcome !!</Text>
           </View>
           <Formik
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   logoContainer: {
-    marginTop:100,
+    marginTop:42,
     alignItems: 'center',
     width: 'auto', // Make the image width dynamic and adjust to the container widt, // Set the image height to 100% of the container height
     objectFit: 'cover',
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },smoltext:{
-    top:-22,
+    top:-2,
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
