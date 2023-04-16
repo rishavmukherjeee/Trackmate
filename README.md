@@ -13,7 +13,7 @@ yarn start
 to get started!<br/>
 You will also need a .env file with all the firebase config in it
 <h3>Better UI</h3><br/>
-![Alt text]https://i.imgur.com/rOyklch.jpeg
-![Alt text]https://i.imgur.com/wM6oCQ0.jpeg
-![Alt text]https://i.imgur.com/HPQbXcm.jpeg
-![Alt text]https://i.imgur.com/ZLAdJ1r.jpeg
+![Sign-up Page](https://i.imgur.com/rOyklch.jpeg)
+![Login-Page](https://i.imgur.com/wM6oCQ0.jpeg)
+![Home Screen](https://i.imgur.com/HPQbXcm.jpeg)
+![Room](https://i.imgur.com/ZLAdJ1r.jpeg)
