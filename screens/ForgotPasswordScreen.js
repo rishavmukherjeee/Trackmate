@@ -23,7 +23,7 @@ export const ForgotPasswordScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-    source={require('../assets/back3.png')}
+    source={require('../assets/back3.jpeg')}
     style={styles.background}
     >
     <View isSafe style={styles.container}>
