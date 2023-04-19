@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'Expo Firebase Starter',
+    name: 'TrackMate!',
     slug: 'expo-firebase',
     privacy: 'public',
     platforms: ['ios', 'android'],
@@ -28,14 +28,13 @@ export default {
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
-      eas: {
-        projectId: "7a91c17d-529e-4433-be41-3a616475e31c"
+      "eas": {
+        "projectId": "847d5228-6d08-47f2-8dce-f424a5580afb"
       }
     },
     android: {
+      package: 'com.example.myapp',
       permissions: ['NOTIFICATIONS'],
-      package: "com.travell.trackmate"
     }
-    
   }
 };
