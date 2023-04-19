@@ -39,7 +39,7 @@ export const AppStack = () => {
           ),
         }}/>
         <Stack.Screen name='Chat' component={ChatScreen} />
-      <Stack.Screen name='Trav' component={Travel} />
+      <Stack.Screen name='Travel' component={Travel} />
 
         
     </Stack.Navigator>
