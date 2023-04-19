@@ -22,7 +22,7 @@ export const LoginScreen = ({ navigation }) => {
   };
   return (
     <ImageBackground
-    source={require('../assets/back2.png')}
+    source={require('../assets/back2.jpeg')}
     style={styles.background}
     >
       <View isSafe style={styles.container}>

@@ -29,7 +29,7 @@ const HomeScreen = () => {
   
   return (
     <ImageBackground
-      source={require('../assets/back.png')}
+      source={require('../assets/back.jpeg')}
       style={styles.background}
     >
       <View style={styles.container}>
