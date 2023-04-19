@@ -29,7 +29,8 @@ export default {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
       "eas": {
-        "projectId": "847d5228-6d08-47f2-8dce-f424a5580afb"
+        //"projectId": "847d5228-6d08-47f2-8dce-f424a5580afb"//
+        "projectId": "7a91c17d-529e-4433-be41-3a616475e31c"
       }
     },
     android: {
